@@ -7,8 +7,8 @@ const randomizeBanner = () => Math.floor(Math.random() * 4) + 1;
 const randomizeAvatar = () => Math.floor(Math.random() * 7) + 1;
 
 const Register = () => {
-    const {currentUser, loading} = useSelector(state => state.users);
-    const [error, setError] = useState(null);
+    const {currentUser, loading, error} = useSelector(state => state.users);
+    const [errorMessage, setErrorMessage] = useState(null);
     const banner = `${randomizeBanner()}`;
     const avatar = `${randomizeAvatar()}`;
     const [firstName, setFirstName] = useState('');
@@ -85,25 +85,25 @@ const Register = () => {
     const navigate = useNavigate();
     const handleRegisterBtn = () => {
         if (firstName === '') {
-            setError('Please enter your first name');
+            setErrorMessage('Please enter your first name');
         } else if (lastName === '') {
-            setError('Please enter your last name');
+            setErrorMessage('Please enter your last name');
         } else if (birthday === '') {
-            setError('Please enter your date of birth');
+            setErrorMessage('Please enter your date of birth');
         } else if (email === '') {
-            setError('Please enter your email address');
+            setErrorMessage('Please enter your email address');
         } else if (username === '') {
-            setError('Please enter your username');
+            setErrorMessage('Please enter your username');
         } else if (password === '') {
-            setError('Please enter your password');
+            setErrorMessage('Please enter your password');
         } else if (validatePassword === '') {
-            setError('Please reenter your password');
+            setErrorMessage('Please reenter your password');
         } else if (password !== validatePassword) {
-            setError('Passwords must match');
+            setErrorMessage('Passwords must match');
         } else if (accountType === '') {
-            setError('Please select the type of account you want to create');
+            setErrorMessage('Please select the type of account you want to create');
         } else {
-            setError(null);
+            setErrorMessage(null);
             const newUser = {
                 banner,
                 avatar,
@@ -122,7 +122,9 @@ const Register = () => {
                 "role": accountType
             };
             dispatch(registerThunk(newUser));
-            if (!loading) {
+            if (error === 'Request failed with status code 403') {
+                setErrorMessage('User already existing')
+            } else if (!loading) {
                 navigate('/profile');
             }
         }
@@ -136,42 +138,6 @@ const Register = () => {
                 <h1 className="fw-bolder mt-2 text-center">
                     Create your CoinChat account
                 </h1>
-                {/*<div className="position-relative">*/}
-                {/*    <img src="/images/opacity.jpeg"*/}
-                {/*         className="opacity-50 position-absolute"*/}
-                {/*         width="100%"*/}
-                {/*         height={250}*/}
-                {/*         alt="null"/>*/}
-                {/*    <img src={`/images/profile-banner.jpg`}*/}
-                {/*         className="opacity-50"*/}
-                {/*         width="100%"*/}
-                {/*         height={250}*/}
-                {/*         alt="user's profile banner"/>*/}
-                {/*</div>*/}
-                {/*<div className="position-relative">*/}
-                {/*    <img src="/images/opacity.jpeg"*/}
-                {/*         className="rounded-circle wd-profile-nudge-up position-absolute"*/}
-                {/*         width={200}*/}
-                {/*         height={200}*/}
-                {/*         alt="null"/>*/}
-                {/*    <img src={`/images/profile-picture.jpg`}*/}
-                {/*         className="rounded-circle wd-profile-nudge-up position-absolute opacity-50"*/}
-                {/*         width={200}*/}
-                {/*         height={200}*/}
-                {/*         alt="user's avatar"/>*/}
-                {/*    <button className="wd-clear-button-styling position-absolute">*/}
-                {/*        <i className="bi bi-circle-fill position-absolute wd-circle-avatar-overlap opacity-50 hstack"/>*/}
-                {/*        <i className="bi bi-camera position-absolute wd-camera-avatar-overlap opacity-75 hstack"/>*/}
-                {/*    </button>*/}
-                {/*    <button className="wd-clear-button-styling position-absolute">*/}
-                {/*        <i className="bi bi-circle-fill position-absolute wd-circle-camera-banner-overlap opacity-50 hstack"/>*/}
-                {/*        <i className="bi bi-camera position-absolute wd-camera-banner-overlap opacity-75 hstack"/>*/}
-                {/*    </button>*/}
-                {/*    <button className="wd-clear-button-styling position-absolute">*/}
-                {/*        <i className="bi bi-circle-fill position-absolute wd-circle-x-banner-overlap opacity-50 hstack"/>*/}
-                {/*        <i className="bi bi-x position-absolute wd-x-banner-overlap opacity-75 hstack"/>*/}
-                {/*    </button>*/}
-                {/*</div>*/}
                 <div className="position-relative">
                     <hr/>
                     <h6>
@@ -410,9 +376,9 @@ const Register = () => {
                     </select>
                     <br/>
                     {
-                        error &&
+                        errorMessage &&
                         <div className="alert alert-danger">
-                            {error}
+                            {errorMessage}
                         </div>
                     }
                     <div className="d-flex justify-content-center">

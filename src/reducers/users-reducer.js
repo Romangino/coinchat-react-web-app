@@ -38,7 +38,7 @@ const UsersReducer = createSlice({
         },
         [registerThunk.rejected]: (state, action) => {
             state.loading = false;
-            state.error = action.payload;
+            state.error = action.error.message;
             state.currentUser = null;
         },
         [findAllUsersThunk.pending]: state => {

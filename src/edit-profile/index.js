@@ -59,7 +59,7 @@ const EditProfile = () => {
                              src={`/images/p${currentUser.avatar}.jpg`} alt=""/>
                     </div>
                     <div className="card-body">
-                        <p className="card-text">
+                        <div className="card-text">
                             <div className={'row pt-1'}>
                                 <div className={'col text-center'}>
                                     <div className='w-100 '>
@@ -230,7 +230,7 @@ const EditProfile = () => {
                                            onChange={event => setAddress(event.target.value)}/>
                                 </div>
                             </div>
-                            <div className={"form-group pt-2"}>
+                            <div className={"form-group pt-2 mb-2"}>
                                 <div className={'border border-secondary rounded-2 border-opacity-25 p-1'}>
                                     <label className={'ps-2 text-secondary fs-6'}
                                            htmlFor={"account-field"}>Account Type</label>
@@ -253,7 +253,7 @@ const EditProfile = () => {
                                     </select>
                                 </div>
                             </div>
-                        </p>
+                        </div>
                         <div className={'text-center row'}>
                             <div className={'col'}>
                                 <button className={'btn btn-primary w-100'}

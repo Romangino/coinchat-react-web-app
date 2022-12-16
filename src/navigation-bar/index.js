@@ -23,50 +23,6 @@ function NavigationBar() {
 
     if (active === 'login') {
         return null;
-    } else if (active === 'register') {
-        return (
-            <>
-                {['md'].map((expand) => (
-                                <Navbar key={expand}
-                                        expand={expand}
-                                        className="wd-nav-bar-bg-font">
-                                    <Container fluid>
-                                        <Navbar.Brand href="/"
-                                                      style={{"color": "#ffc300"}}>
-                                            CoinChat
-                                        </Navbar.Brand>
-                                        <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`}/>
-                                        <Navbar.Offcanvas
-                                            id={`offcanvasNavbar-expand-${expand}`}
-                                            aria-labelledby={`offcanvasNavbarLabel-expand-${expand}`}
-                                            placement="end">
-                                            <Offcanvas.Header closeButton
-                                                              className="wd-nav-bar-bg-font"
-                                                              style={{"color": "#ffc300"}}>
-                                                <Offcanvas.Title id={`offcanvasNavbarLabel-expand-${expand}`}>
-                                                    CoinChat
-                                                </Offcanvas.Title>
-                                            </Offcanvas.Header>
-                                            <Offcanvas.Body>
-                                                <Nav className="justify-content-end flex-grow-1 my-auto">
-                                                    <LinkContainer to="/register">
-                                                        <Nav.Link className={`wd-nav-bar`}>
-                                                            Register
-                                                        </Nav.Link>
-                                                    </LinkContainer>
-                                                    <LinkContainer to="/login">
-                                                        <Nav.Link className={`wd-nav-bar`}>
-                                                            Login
-                                                        </Nav.Link>
-                                                    </LinkContainer>
-                                                </Nav>
-                                            </Offcanvas.Body>
-                                        </Navbar.Offcanvas>
-                                    </Container>
-                                </Navbar>
-                ))}
-            </>
-        )
     } else {
         return (
             <>
@@ -94,22 +50,23 @@ function NavigationBar() {
                                 <Offcanvas.Body>
                                     <Nav className="justify-content-start flex-grow-1 my-auto">
                                         <LinkContainer to="/">
-                                            <Nav.Link className={`wd-nav-bar`}>
+                                            <Nav.Link className={`wd-nav-bar`} active={
+                                                active === 'home'
+                                            }>
                                                 Home
                                             </Nav.Link>
                                         </LinkContainer>
-                                        <LinkContainer to="bloglist">
-                                            <Nav.Link className={`wd-nav-bar`}>
-                                                Blog
-                                            </Nav.Link>
-                                        </LinkContainer>
                                         <LinkContainer to="profile">
-                                            <Nav.Link className={`wd-nav-bar`}>
+                                            <Nav.Link className={`wd-nav-bar`} active={
+                                                active === 'profile'
+                                            }>
                                                 Profile
                                             </Nav.Link>
                                         </LinkContainer>
                                         <LinkContainer to="search">
-                                            <Nav.Link className={`wd-nav-bar`}>
+                                            <Nav.Link className={`wd-nav-bar`} active={
+                                                active === 'search'
+                                            }>
                                                 Search
                                             </Nav.Link>
                                         </LinkContainer>
@@ -130,7 +87,9 @@ function NavigationBar() {
                                         !currentUser &&
                                         <Nav>
                                             <LinkContainer to="register">
-                                                <Nav.Link className="wd-nav-bar">
+                                                <Nav.Link className="wd-nav-bar" active={
+                                                    active === 'register'
+                                                }>
                                                     Register
                                                 </Nav.Link>
                                             </LinkContainer>
@@ -151,23 +110,23 @@ function NavigationBar() {
                                                         width={30}
                                                         src={currentUser && `/images/p${currentUser.avatar}.jpg`}
                                                         alt="user's avatar"/>}
-                                            id="dropdown-menu-align-end">
+                                            id="dropdown-menu-align-end"
+                                            autoClose={true}>
                                             {
                                                 currentUser.role === 'ADMIN' &&
-                                                <LinkContainer to="edit-users">
-                                                    <Dropdown.Item eventKey="1">
+                                                <LinkContainer to="edit-users" >
+                                                    <Dropdown.Item eventKey="1" active={
+                                                        active === 'edit-users'
+                                                    }>
                                                         Edit Users
                                                     </Dropdown.Item>
                                                 </LinkContainer>
                                             }
-                                            <LinkContainer to="blog">
-                                                <Dropdown.Item eventKey="2">
+                                            <LinkContainer to="bloglist">
+                                                <Dropdown.Item eventKey="2" active={
+                                                    active === 'bloglist'
+                                                }>
                                                     Blog
-                                                </Dropdown.Item>
-                                            </LinkContainer>
-                                            <LinkContainer to="">
-                                                <Dropdown.Item eventKey="3">
-                                                    Link 2
                                                 </Dropdown.Item>
                                             </LinkContainer>
                                             <Dropdown.Divider/>

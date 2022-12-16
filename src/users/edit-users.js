@@ -12,7 +12,7 @@ const EditUsers = () => {
         dispatch(findAllUsersThunk());
     }, []);
     const createUserHandler = () => {
-        navigate('/create-user');
+        navigate('/edit-users/create-user');
     };
     const deleteUserHandler = uid => {
         if (uid === currentUser._id) {

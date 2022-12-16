@@ -76,7 +76,7 @@ function App() {
                                     <EditUsers/>
                                 </ProtectedRoute>
                             }/>
-                            <Route path={'/create-user'}
+                            <Route path={'/edit-users/create-user'}
                                    element={
                                        <ProtectedRoute>
                                            <CreateUser/>

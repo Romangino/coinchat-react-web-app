@@ -22,8 +22,10 @@ const Login = () => {
     const navigate = useNavigate();
     const handleLoginBtn = () => {
         if (username === '') {
+            setPasswordError(null);
             setUsernameError('Please enter a valid username');
         } else if (password === '') {
+            setUsernameError(null);
             setPasswordError('Please enter a valid password');
         } else {
             const loginUser = {handle: username, password};
@@ -110,7 +112,7 @@ const Login = () => {
                             }
                             <div>
                                 <div className="d-flex justify-content-center">
-                                    <button type="submit"
+                                    <button type="button"
                                             className="btn wd-btn-style rounded-pill mt-2 w-75 wd-font"
                                             onClick={handleLoginBtn}>
                                         Login

@@ -94,6 +94,12 @@ h4, h5, h6, p {
   --bs-dropdown-link-active-bg: #033153 !important;
 }
 
+@media (max-width: 768px) {
+  .dropdown-menu-end[data-bs-popper] {
+    right: unset;
+  }
+}
+
 /*.navbar-nav {*/
 /*  --bs-nav-link-color: #ffc300;*/
 /*  --bs-btn-color: #ffc300;*/
